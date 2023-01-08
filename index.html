@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- <meta charset="utf-8"/> -->
+    <title>Complex Password Generator</title>
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="css/images/favicon.ico"/> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <style>
+
+    html{
+      overflow-x: hidden;
+    }
+    label{
+    font-family: cursive;
+    }
+    .form-control{
+    font-family: cursive;
+    }
+    .fs-1{
+    font-family: cursive;
+    }
+
+    </style>
+  </head>
+  <body style="background: whitesmoke">
+    <div class="row justify-content-center align-items-center">
+      <div class="fs-1 text-center fw-bold my-2">Complex Password Generator</div>
+      <div class="col-12 ms-2 col-lg-5">
+        <div class="form-control border-primary border-5 mt-3" style="background: #81AAD7">
+          <label class="fw-bold mb-2">Enter your custom string(seed):</label>
+          <input type="text" name="pass" id="pass" class="form-control">
+          <div class="row">
+            <div class="col-4">
+              <label class="fw-bold my-2">Random Caesar Shift:</label>
+            </div>
+            <div class="col-4">
+              <label class="fw-bold my-2">Random Key A:</label>
+            </div>
+            <div class="col-4">
+              <label class="fw-bold my-2">Random Key B:</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-4">
+              <input type="number" name="keynum" id="keynum" min="1" max="100" class="form-control">
+            </div>
+            <div class="col-4">
+              <input type="number" name="number-A" id="A" min="1" max="100" class="form-control">
+            </div>
+            <div class="col-4">
+              <input type="number" name="number-B" id="B" min="1" max="100" class="form-control">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-5">
+              <label class="fw-bold my-2">New password max length:</label>
+            </div>
+            <div class="col-7">
+              <label class="fw-bold my-2">Service you would use the password for:</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-5">
+              <input type="number" name="length" id="C" min="1" max="100" placeholder="Unlimited" class="form-control">
+            </div>
+            <div class="col-7">
+              <select name="service" id="service" class="form-select">
+                <option value="Google">Google</option>
+                <option value="Facebook">Facebook</option>
+                <option value="Instagram">Instagram</option>
+                <option value="Microsoft">Microsoft</option>
+                <option value="Outlook">Outlook</option>
+                <option value="Hotmail">Hotmail</option>
+                <option value="Custom" id="custom">Add Custom</option>
+              </select>
+            </div>
+          </div>
+          <div id="customfield" hidden="hidden">
+            <label class="fw-bold my-2">Type your custom service or hint:</label>
+            <input type="text" name="custom_service" id="custom_service" class="form-control">
+          </div>
+          <label class="fw-bold my-2">Hashed password:</label>
+          <input type="text" name="hashed" id="result" class="form-control">
+          <input type="submit" class="btn bg-primary fw-semibold border-dark border-2 text-white mt-3 mb-2" name="change" id="funct" value="Generate password">
+          <input type="submit" name="save" class="btn bg-success ms-2 fw-semibold border-dark border-2 text-white mt-3 mb-2" value="Export password to file" onclick="saveFile()">
+        </div>
+        <div class="text-center mt-2" style="font-family: cursive; font-size: 11px">by DarkFirePhoenix ©</div>
+      </div>
+    </div>
+  </body>
+  <script type="text/javascript">
+
+  const password = document.getElementById('pass');
+  const funct = document.getElementById('funct')
+  const final = document.getElementById('result');
+  const keynum = document.getElementById('keynum');
+  const service = document.getElementById('service');
+  const custom = document.getElementById('custom');
+
+// Проверяваме ако потребителя е избрал добяването на персонализирана услуга(която се пада 6-та по ред в списъка).
+
+service.addEventListener('change',(e) =>{
+
+    if(service.selectedIndex != 6){
+    document.getElementById('customfield').hidden = true;
+    document.getElementById('custom_service').value = service.value; 
+    }
+
+    else{
+    document.getElementById('customfield').hidden = false;
+    document.getElementById('custom_service').value = '';   
+    }
+
+});
+
+  // Добавяме EventListener на бутона за генериране на парола.
+
+  funct.addEventListener('click', (e) =>{
+
+  var result = "";
+
+  // Стрингът се превръща в подобен на 16-тичен код, но с някои допълнения, за да не може да бъде декриптиран лесно обратно.
+  // Също така се генерира случайно число A което ще определи преобразуването на стринга.
+  // Проверява се дали има въведен стринг(seed) за генерация.
+
+      if(password.value !== ""){
+
+    for (i=0; i<password.value.length; i++) {
+      hexlike = password.value.charCodeAt(i).toString(16);
+      hexrandom = Math.floor(Math.random() * (100 - 1 + 1) + 1);
+      // hexrandom = 100;
+      result += (hexrandom+hexlike).slice(-4);
+      document.getElementById('A').value = hexrandom;
+      
+    }
+
+  // Генерира се случайно число което ще се използва в шифърът на Цезар.
+
+    keynum.value = Math.floor(Math.random() * (100 - 1 + 1) + 1);
+    // keynum.value = 1;
+    let encodedString = caesarCipher(result,keynum.value);
+    final.value = btoa(encodedString);
+    for (var i; i < final.value.length;i++) {
+
+  // Генерира се число B от което зависи промяната на определени символи в стринга.
+  // Също така се заместват всички знаци = за да се прикрие, че стринга използва и base64 кодиране и потребителя има правото да избере колко да е максималната дължина на генерираната парола чрез числото C.
+
+    finalrandom = Math.floor(Math.random() * (100 - 1 + 1) + 1);
+    // finalrandom = 1;
+    document.getElementById('B').value = finalrandom;
+    final.value=final.value.replace(finalrandom, random());
+    final.value=final.value.replace('=',random());
+    final.value=final.value.slice('-'+document.getElementById('C').value);
+    }
+    
+    }
+  });
+
+  // Функция за промяната на един символ с друг, за да се осигури напълно случайна генерация на крайния стринг.
+
+  const random = (length = 1) => {
+
+    // Декларираме всички символи които ще се използват при заместването.
+
+    let chars = '1234567890!@#$%^&*()';
+
+    // Избираме случаен символ да бъде заменен с друг случаен от декларираните по-горе.
+
+    let strnew = '';
+    for (let i = 0; i < length; i++) {
+        strnew += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+
+    return strnew;
+
+};
+
+  // Функция за запис на данни във файл и изтеглянето им.
+
+  let saveFile = () => {
+
+    if(final.value !== ""){
+
+        // Създаваме променлива която ще съдържа всичките данни от полетата които ще се запишат във файл.
+
+        let data = 
+            '--------------------------------------------------------'+ '\n' +
+            'Service or hint: ' + document.getElementById('custom_service').value + '\n' +
+            '--------------------------------------------------------'+ '\n' +
+            'Your custom seed: ' + password.value + '\n' +
+            '--------------------------------------------------------'+ '\n' +
+            'Your secure password: ' + final.value + '\n' +
+            '--------------------------------------------------------';
+        
+        // Преобразуваме текста в Blob с формат UTF-8.
+
+        const textToBLOB = new Blob([data], { type: 'text/plain' });
+
+        // Декларираме файл в който ще се записват данните.
+
+        const sFileName = 'pass.txt';
+
+        let url = document.createElement("a");
+        url.download = sFileName;
+
+        if (window.webkitURL != null) {
+            url.href = window.webkitURL.createObjectURL(textToBLOB);
+        }
+        else {
+            url.href = window.URL.createObjectURL(textToBLOB);
+            url.style.display = "none";
+            document.body.appendChild(url);
+        }
+
+        url.click(); 
+    }
+  }
+
+    // Функция за заменяне на символи в стринга.
+
+    function replacing(str){
+    let strAm = "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890 -_.&?!@ #/";
+    let strNz = "0987654321 nopqrstuvwxyzabcdefghijklm NOPQRSTUVWXYZABCDEFGHIJKLM -_.&?!@ #/";
+      let finstr = '';
+      for (let i = 0; i < str.length; i++){
+        if (strAm.includes(str.charAt(i))){
+          finstr += str.charAt(i).replace(str.charAt(i), strNz[strAm.indexOf(str.charAt(i))]);
+        }
+      }
+      return finstr;
+    }
+
+    // Функция за прилагане на шифърът на Цезар.
+
+    let caesarCipher = (str, key) => {
+      return str.toUpperCase().replace(/[A-Z]/g, c => String.fromCharCode((c.charCodeAt(0)-65 + key ) % 26 + 65));
+    }
+
+    // Спиране на десен клик на мишката.
+
+    document.addEventListener('contextmenu', (e)=>{
+      e.preventDefault();
+    });
+
+    document.onkeydown = function (e) {
+ 
+        // Спиране на F12.
+
+        if(e.keyCode == 123) {
+            return false;
+        }
+        
+        // Спиране на комбинации с учасието на Ctrl.
+
+        // Изключение за отваряне на конзолата.
+
+        if(e.ctrlKey && e.keyCode == 67 && e.shiftKey){
+          return false;
+        }
+
+        // Изключение осигуряващо на потребителя да може да копира и поставя текст в полетата.
+
+        if(e.ctrlKey && e.keyCode == 86 || e.ctrlKey && e.keyCode == 67){
+          return true;
+        }
+
+        // Забраняване на всички останали комбинации с изключението на Ctrl + C и Ctrl + V.
+
+        else if(e.ctrlKey){
+          return false;
+        }
+
+//         // Спиране на комбинация Ctrl + Shift + I.
+
+//         if(e.ctrlKey && e.shiftKey && e.keyCode == 73){
+//             return false;
+//         }
+//         
+//         // Спиране на комбинация Ctrl + Shift + J.
+
+//         if(e.ctrlKey && e.shiftKey && e.keyCode == 74) {
+//             return false;
+//         }
+
+//         // Спиране на комбинация Ctrl + U.
+//  
+//         if(e.ctrlKey && e.keyCode == 85) {
+//             return false;
+//         }
+
+//         // Спиране на комбинация Ctrl + S.
+
+//         if(e.ctrlKey && e.keyCode == 83) {
+//             return false;
+//         }
+    }
+
+  </script>
