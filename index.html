@@ -231,21 +231,12 @@ service.addEventListener('change',(e) =>{
 
     document.onkeydown = function (e) {
 
-        if(e.keyCode == 123) {
-            return false;
-        }
-
-        if(e.ctrlKey && e.keyCode == 67 && e.shiftKey){
-          return false;
-        }
-
-        if(e.ctrlKey && e.keyCode == 86 || e.ctrlKey && e.keyCode == 67){
-          return true;
-        }
-
-        else if(e.ctrlKey){
-          return false;
-        }
+        if(e.ctrlKey && e.keyCode == 86 || e.ctrlKey && e.keyCode == 67 || e.ctrlKey && e.keyCode == 65 || e.ctrlKey && e.keyCode == 88){
+                return true;
+              }
+              else if(e.ctrlKey || e.keyCode == 123){
+                return false;
+              }
     }
 
   </script>
