@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- <meta charset="utf-8"/> -->
+    <meta charset="utf-8"
     <title>Complex Password Generator</title>
     <!-- <link rel="shortcut icon" type="image/x-icon" href="css/images/favicon.ico"/> -->
     <script src="https://code.jquery.com/jquery.min.js"></script>
@@ -163,9 +163,9 @@ service.addEventListener('change',(e) =>{
         }
   });
 
-  const random = (length = 1) => {
+  const random = (length = (Math.random()*(10-3) + 3)) => {
 
-    let chars = '1234567890!@#$%^&*()';
+    let chars = '1234567890!@#$%^&*()-_.?/{}[];":';
 
     let strnew = '';
     for (let i = 0; i < length; i++) {
