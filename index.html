@@ -1,66 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" oncontextmenu="return false">
   <head>
     <meta charset="utf-8">
-    <title>Complex Password Generator</title>
+    <title>Quick Password Generator</title>
     <link rel="icon" type="image/x-icon" href="https://img.icons8.com/fluency/96/null/check-lock.png">
-    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <style>
-
-    html{
-      overflow-x: hidden;
-    }
-    label{
-    font-family: cursive;
-    }
-    .form-control{
-    font-family: cursive;
-    }
-    .fs-1{
-    font-family: cursive;
-    }
-    .fw-bold{
-    font-family: cursive;
-    }
-    .btn{
-    font-family: cursive;
-    }
-    .modal-body{
-    font-family: cursive;
-    font-style: italic;
-    }
-
-    </style>
   </head>
-  <body style="background: whitesmoke">
-    <div class="row justify-content-center align-items-center">
-      <div class="fs-1 text-center fw-bold my-2">Complex Password Generator</div>
-      <div class="col-12 ms-2 col-lg-5">
-        <div class="form-control border-primary border-5 mt-3" style="background: #81AAD7">
-          <label class="fw-bold mb-2">Enter your custom string(seed):</label>
-          <input type="text" name="pass" id="pass" class="form-control">
+  <body>
+    <div class="row justify-content-center align-items-center text-light">
+      <div class="fs-1 text-center fw-bold mb-2 mt-5">Quick Password Generator</div>
+      <div class="col-lg-5 ms-2 col-7">
+        <div class="form-control border-5 mt-3 text-light px-3">
+          <label class="fw-bold mb-2 mt-1">Enter your custom string for generation <span class="text-warning fw-light">(enter whaterver you like)</span>:</label>
+          <input type="text" name="pass" id="pass" class="form-control clearbox">
           <div class="row">
             <div class="col-4">
               <label class="fw-bold my-2">Random Caesar Shift:</label>
             </div>
             <div class="col-4">
-              <label class="fw-bold my-2">Random Key A:</label>
+              <label class="fw-bold my-2">Random Key №1:</label>
             </div>
             <div class="col-4">
-              <label class="fw-bold my-2">Random Key B:</label>
+              <label class="fw-bold my-2">Random Key №2:</label>
             </div>
           </div>
           <div class="row">
             <div class="col-4">
-              <input type="number" name="keynum" id="keynum" min="1" max="100" class="form-control">
+              <input type="text" readonly name="keynum" id="keynum" class="form-control p-2 clearbox" placeholder="Randomly generated">
             </div>
             <div class="col-4">
-              <input type="number" name="number-A" id="A" min="1" max="100" class="form-control">
+              <input type="text" readonly name="number-A" id="A" class="form-control p-2 clearbox" placeholder="Randomly generated">
             </div>
             <div class="col-4">
-              <input type="number" name="number-B" id="B" min="1" max="100" class="form-control">
+              <input type="text" readonly name="number-B" id="B" class="form-control p-2 clearbox" placeholder="Randomly generated">
+            </div>
+          </div>
+          <div class="row">
+            <label for="customRange" class="form-label mt-2 fw-bold">Password complexity:</label>
+            <input type="range" class="form-range p-1 rounded-3 mx-2 bgslide" min="1" max="9" id="customRange">
+            <div class="row d-flex justify-content-between">
+              <div class="col-1 complexity">weak</div>
+              <div class="col-1 complexity">medium</div>
+              <div class="col-1 complexity">strong</div>
             </div>
           </div>
           <div class="row">
@@ -73,10 +55,10 @@
           </div>
           <div class="row">
             <div class="col-5">
-              <input type="number" name="length" id="C" min="1" max="100" placeholder="Unlimited" class="form-control">
+              <input type="number" name="length" id="C" min="1" max="100" placeholder="Unlimited" class="form-control clearbox">
             </div>
             <div class="col-7">
-              <select name="service" id="service" class="form-select">
+              <select name="service" id="service" class="form-control text-light bg-black bgselect">
                 <option value="Google">Google</option>
                 <option value="Facebook">Facebook</option>
                 <option value="Instagram">Instagram</option>
@@ -89,154 +71,19 @@
           </div>
           <div id="customfield" hidden="hidden">
             <label class="fw-bold my-2">Type your custom service or hint:</label>
-            <input type="text" name="custom_service" id="custom_service" class="form-control">
+            <input type="text" name="custom_service" id="custom_service" class="form-control clearbox">
           </div>
           <label class="fw-bold my-2">Hashed password:</label>
-          <input type="text" name="hashed" id="result" class="form-control">
-          <input type="submit" class="btn bg-primary fw-semibold border-dark border-2 text-white mt-3 mb-2" name="change" id="funct" value="Generate password">
-          <input type="submit" name="save" class="btn bg-success ms-2 fw-semibold border-dark border-2 text-white mt-3 mb-2" value="Export password to file" onclick="saveFile()">
+          <input type="text" readonly name="hashed" id="result" class="form-control clearbox">
+          <input type="submit" class="btn btn-dark fw-semibold border-info border-3 text-white mt-4 mb-3" name="change" id="funct" value="Generate password">
+          <input type="submit" name="save" class="btn btn-dark ms-2 fw-semibold border-info border-3 text-white mt-4 mb-3" value="Export password to file" id="savefile" onclick="saveFile()">
+          <input type="submit" class="btn btn-dark fw-semibold border-info border-3 text-white mt-4 mb-3 ms-2" name="reset" id="reset" value="Reset generator">
         </div>
         <div class="text-center mt-2" style="font-family: cursive; font-size: 11px">by DarkFirePhoenixX ©</div>
       </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="func.js"></script>
   </body>
-  <script type="text/javascript">
-
-  const password = document.getElementById('pass');
-  const funct = document.getElementById('funct')
-  const final = document.getElementById('result');
-  const keynum = document.getElementById('keynum');
-  const service = document.getElementById('service');
-  const custom = document.getElementById('custom');
-
-service.addEventListener('change',(e) =>{
-
-    if(service.selectedIndex != 6){
-    document.getElementById('customfield').hidden = true;
-    document.getElementById('custom_service').value = service.value; 
-    }
-
-    else{
-    document.getElementById('customfield').hidden = false;
-    document.getElementById('custom_service').value = '';   
-    }
-
-});
-
-  funct.addEventListener('click', (e) =>{
-
-  var result = "";
-
-      if(password.value !== ""){
-
-    for (i=0; i<password.value.length; i++) {
-      hexlike = password.value.charCodeAt(i).toString(16);
-      hexrandom = Math.floor(Math.random() * (100 - 1 + 1) + 1);
-      result += (hexrandom+hexlike).slice(-4);
-      document.getElementById('A').value = hexrandom;
-      
-    }
-
-    keynum.value = Math.floor(Math.random() * (100 - 1 + 1) + 1);
-    let encodedString = caesarCipher(result,keynum.value);
-    final.value = btoa(encodedString);
-    for (var i; i < final.value.length;i++) {
-
-    finalrandom = Math.floor(Math.random() * (100 - 1 + 1) + 1);
-    document.getElementById('B').value = finalrandom;
-    final.value=final.value.replace(finalrandom, random());
-    final.value=final.value.replace('=',random());
-    final.value=final.value.slice('-'+document.getElementById('C').value);
-    }
-    
-    }
-    else{
-    (function() {
-    window.alert = function() {
-      modalpopup = $('<div id="myModal" class="modal fade mt-5" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h5 id="myModalTitle" class="modal-title fw-bold">Warning</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body text-secondary"></div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Okay</button></div></div></div></div>');
-      modalpopup.find(".modal-body").text(arguments[0]);
-      modal = new bootstrap.Modal(modalpopup);
-      modal.show();
-    };
-      })();
-      alert('Please provide your custom phrase in the first field in order to proceed with the password generation process.');
-        }
-  });
-
-  const random = (length = (Math.random()*(10-3) + 3)) => {
-
-    let chars = '1234567890!@#$%^&*()-_.?/{}[];":';
-
-    let strnew = '';
-    for (let i = 0; i < length; i++) {
-        strnew += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-
-    return strnew;
-
-};
-
-  let saveFile = () => {
-
-    if(final.value !== ""){
-
-        let data = 
-            '--------------------------------------------------------'+ '\n' +
-            'Service or hint: ' + document.getElementById('custom_service').value + '\n' +
-            '--------------------------------------------------------'+ '\n' +
-            'Your custom seed: ' + password.value + '\n' +
-            '--------------------------------------------------------'+ '\n' +
-            'Your secure password: ' + final.value + '\n' +
-            '--------------------------------------------------------';
-
-        const textToBLOB = new Blob([data], { type: 'text/plain' });
-
-        const sFileName = 'pass.txt';
-
-        let url = document.createElement("a");
-        url.download = sFileName;
-
-        if (window.webkitURL != null) {
-            url.href = window.webkitURL.createObjectURL(textToBLOB);
-        }
-        else {
-            url.href = window.URL.createObjectURL(textToBLOB);
-            url.style.display = "none";
-            document.body.appendChild(url);
-        }
-
-        url.click(); 
-    }
-  }
-
-    function replacing(str){
-    let strAm = "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890 -_.&?!@ #/";
-    let strNz = "0987654321 nopqrstuvwxyzabcdefghijklm NOPQRSTUVWXYZABCDEFGHIJKLM -_.&?!@ #/";
-      let finstr = '';
-      for (let i = 0; i < str.length; i++){
-        if (strAm.includes(str.charAt(i))){
-          finstr += str.charAt(i).replace(str.charAt(i), strNz[strAm.indexOf(str.charAt(i))]);
-        }
-      }
-      return finstr;
-    }
-
-    let caesarCipher = (str, key) => {
-      return str.toUpperCase().replace(/[A-Z]/g, c => String.fromCharCode((c.charCodeAt(0)-65 + key ) % 26 + 65));
-    }
-
-    document.addEventListener('contextmenu', (e)=>{
-      e.preventDefault();
-    });
-
-    document.onkeydown = function (e) {
-
-        if(e.ctrlKey && e.keyCode == 86 || e.ctrlKey && e.keyCode == 67 || e.ctrlKey && e.keyCode == 65 || e.ctrlKey && e.keyCode == 88){
-                return true;
-              }
-              else if(e.ctrlKey || e.keyCode == 123){
-                return false;
-              }
-    }
-
-  </script>
+  </html>
