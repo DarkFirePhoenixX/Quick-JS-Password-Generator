@@ -49,7 +49,7 @@ funct.addEventListener('click', (e) => {
     else {
         (function () {
             window.alert = function () {
-                modalpopup = $('<div id="myModal" class="modal fade mt-5 text-light" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true"><div class="modal-dialog"><div class="modal-content border-info"><div class="modal-header border-info"><h5 id="myModalTitle" class="modal-title fw-bold">Warning</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body text-light"></div><div class="modal-footer border-info"><button type="button" class="btn btn-secondary border-info border-3" data-bs-dismiss="modal">Okay</button></div></div></div></div>');
+                modalpopup = $('<div id="myModal" class="modal fade mt-5 text-light" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true"><div class="modal-dialog"><div class="modal-content border-info"><div class="modal-header border-info"><h5 id="myModalTitle" class="modal-title fw-bold text-warning fs-4">Warning</h5><button type="button" class="btn-close bg-info" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body text-light fw-bold"></div><div class="modal-footer border-info"><button type="button" class="btn btn-secondary border-info border-3 fw-bold" data-bs-dismiss="modal">Okay</button></div></div></div></div>');
                 modalpopup.find(".modal-body").text(arguments[0]);
                 modal = new bootstrap.Modal(modalpopup);
                 modal.show();
@@ -135,7 +135,7 @@ let saveFile = () => {
     else {
         (function () {
             window.alert = function () {
-                modalpopup = $('<div id="myModal" class="modal fade mt-5 text-light" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true"><div class="modal-dialog"><div class="modal-content border-info"><div class="modal-header border-info"><h5 id="myModalTitle" class="modal-title fw-bold">Warning</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body text-light"></div><div class="modal-footer border-info"><button type="button" class="btn btn-secondary border-info border-3" data-bs-dismiss="modal">Okay</button></div></div></div></div>');
+                modalpopup = $('<div id="myModal" class="modal fade mt-5 text-light" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true"><div class="modal-dialog"><div class="modal-content border-info"><div class="modal-header border-info"><h5 id="myModalTitle" class="modal-title fw-bold text-warning fs-4">Warning</h5><button type="button" class="btn-close bg-info" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body text-light fw-bold"></div><div class="modal-footer border-info"><button type="button" class="btn btn-secondary border-info border-3 fw-bold" data-bs-dismiss="modal">Okay</button></div></div></div></div>');
                 modalpopup.find(".modal-body").text(arguments[0]);
                 modal = new bootstrap.Modal(modalpopup);
                 modal.show();
