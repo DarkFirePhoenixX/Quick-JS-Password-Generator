@@ -5,7 +5,11 @@ const keynum = document.getElementById('keynum');
 const service = document.getElementById('service');
 const custom = document.getElementById('custom');
 
-service.addEventListener('change', (e) => {
+document.addEventListener('DOMContentLoaded',function(){
+    document.getElementById('custom_service').value = "Google"
+})
+
+service.addEventListener('change', function() {
 
     if (service.selectedIndex != 6) {
         document.getElementById('customfield').hidden = true;
@@ -19,7 +23,7 @@ service.addEventListener('change', (e) => {
 
 });
 
-funct.addEventListener('click', (e) => {
+funct.addEventListener('click', function() {
 
     var result = "";
 
