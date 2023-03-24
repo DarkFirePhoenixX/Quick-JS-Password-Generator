@@ -105,7 +105,8 @@ let saveFile = () => {
 
     if (final.value !== "") {
 
-        let data =
+        if(document.getElementById('custom_service').hidden == false){
+            let data =
             '--------------------------------------------------------' + '\n' +
             'Service or hint: ' + document.getElementById('custom_service').value + '\n' +
             '--------------------------------------------------------' + '\n' +
@@ -113,24 +114,51 @@ let saveFile = () => {
             '--------------------------------------------------------' + '\n' +
             'Your secure password: ' + final.value + '\n' +
             '--------------------------------------------------------';
+            const textToBLOB = new Blob([data], { type: 'text/plain' });
 
-        const textToBLOB = new Blob([data], { type: 'text/plain' });
-
-        const sFileName = 'pass.txt';
-
-        let url = document.createElement("a");
-        url.download = sFileName;
-
-        if (window.webkitURL != null) {
-            url.href = window.webkitURL.createObjectURL(textToBLOB);
+            const sFileName = 'pass.txt';
+    
+            let url = document.createElement("a");
+            url.download = sFileName;
+    
+            if (window.webkitURL != null) {
+                url.href = window.webkitURL.createObjectURL(textToBLOB);
+            }
+            else {
+                url.href = window.URL.createObjectURL(textToBLOB);
+                url.style.display = "none";
+                document.body.appendChild(url);
+            }
+    
+            url.click();
         }
-        else {
-            url.href = window.URL.createObjectURL(textToBLOB);
-            url.style.display = "none";
-            document.body.appendChild(url);
-        }
+        else{
+            let data =
+            '--------------------------------------------------------' + '\n' +
+            'Service or hint: ' + document.getElementById('service').value + '\n' +
+            '--------------------------------------------------------' + '\n' +
+            'Your custom seed: ' + password.value + '\n' +
+            '--------------------------------------------------------' + '\n' +
+            'Your secure password: ' + final.value + '\n' +
+            '--------------------------------------------------------';
+            const textToBLOB = new Blob([data], { type: 'text/plain' });
 
-        url.click();
+            const sFileName = 'pass.txt';
+    
+            let url = document.createElement("a");
+            url.download = sFileName;
+    
+            if (window.webkitURL != null) {
+                url.href = window.webkitURL.createObjectURL(textToBLOB);
+            }
+            else {
+                url.href = window.URL.createObjectURL(textToBLOB);
+                url.style.display = "none";
+                document.body.appendChild(url);
+            }
+    
+            url.click();
+        }
     }
     else {
         (function () {
