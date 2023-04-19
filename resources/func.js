@@ -166,8 +166,10 @@ let caesarCipher = (str, key) => {
 }
 
 document.onkeydown = function (e) {
-
-    if (e.ctrlKey && e.keyCode == 86 || e.ctrlKey && e.keyCode == 67 || e.ctrlKey && e.keyCode == 65 || e.ctrlKey && e.keyCode == 88) {
+    if( e.ctrlKey && e.shiftKey && e.keyCode == 67){
+                return false;
+            }
+    else if (e.ctrlKey && e.keyCode == 86 || e.ctrlKey && e.keyCode == 67 || e.ctrlKey && e.keyCode == 65 || e.ctrlKey && e.keyCode == 88) {
         return true;
     }
     else if (e.ctrlKey || e.keyCode == 123) {
