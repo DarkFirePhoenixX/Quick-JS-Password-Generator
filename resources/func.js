@@ -95,7 +95,8 @@ rangeInputs.forEach(input => {
 
 const random = (length = (Math.round(Math.random() * (document.getElementById("customRange").value - 1) + 1))) => {
 
-    let chars = '1234567890!@#$%^&*()-_.?/{}[];":';
+    let chars = '1234567890!@#$%^&*()-_.?/{}[];":abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    let complexChars = '1234567890!@#$%^&*()-_.?/{}[];":абвгдежзийклмнопрстуфхцчшщъьюя АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЬЮЯabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     let strnew = '';
 
     if(length <= 1){
@@ -105,14 +106,14 @@ const random = (length = (Math.round(Math.random() * (document.getElementById("c
         return strnew;
     }
     else if(length <= 2){
-        for (let i = 0; i < (length * document.getElementById('C').value) / 2; i++) {
+        for (let i = 0; i < (length * document.getElementById('C').value); i++) {
             strnew += chars.charAt(Math.floor(Math.random() * chars.length));
         }
         return strnew;
     }
     else{
-        for (let i = 0; i < length * 2 * document.getElementById('C').value; i++) {
-            strnew += chars.charAt(Math.floor(Math.random() * chars.length));
+        for (let i = 0; i < length * document.getElementById('C').value; i++) {
+            strnew += complexChars.charAt(Math.floor(Math.random() * complexChars.length));
         }
         return strnew;
     }
