@@ -81,17 +81,29 @@ rangeInputs.forEach(input => {
     input.addEventListener('input', handleInputChange)
 })
 
-const random = (length = (Math.random() * (document.getElementById("customRange").value - 1) + 1)) => {
+const random = (length = (Math.round(Math.random() * (document.getElementById("customRange").value - 1) + 1))) => {
 
     let chars = '1234567890!@#$%^&*()-_.?/{}[];":';
-
     let strnew = '';
-    for (let i = 0; i < length; i++) {
-        strnew += chars.charAt(Math.floor(Math.random() * chars.length));
+
+    if(length <= 1){
+        for (let i = 0; i < length; i++) {
+            strnew += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return strnew;
     }
-
-    return strnew;
-
+    else if(length <= 2){
+        for (let i = 0; i < length*2; i++) {
+            strnew += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return strnew;
+    }
+    else{
+        for (let i = 0; i < length*3; i++) {
+            strnew += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return strnew;
+    }
 };
 
 document.getElementById("reset").addEventListener("click",function(){
