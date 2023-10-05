@@ -95,8 +95,8 @@ rangeInputs.forEach(input => {
 
 const random = (length = (Math.round(Math.random() * (document.getElementById("customRange").value - 1) + 1))) => {
 
-    let chars = '1234567890!@#$%^&*()-_.?/{}[];":abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    let complexChars = '1234567890!@#$%^&*()-_.?/{}[];":абвгдежзийклмнопрстуфхцчшщъьюя АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЬЮЯabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    let chars = '1234567890 !@#$%^&*()-_.?/{}[];": abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    let complexChars = '1234567890 !@#$%^&*()-_.?/{}[];": абвгдежзийклмнопрстуфхцчшщъьюя АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЬЮЯ abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     let strnew = '';
 
     if(length <= 1){
@@ -140,7 +140,7 @@ let saveFile = () => {
             '--------------------------------------------------------' + '\n' +
             'Your custom seed: ' + password.value + '\n' +
             '--------------------------------------------------------' + '\n' +
-            'Your secure password: ' + final.value + '\n' +
+            'Your secure password: ' + final.value.replaceAll(' ','') + '\n' +
             '--------------------------------------------------------';
             const textToBLOB = new Blob([data], { type: 'text/plain' });
 
