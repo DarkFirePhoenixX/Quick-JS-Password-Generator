@@ -48,7 +48,6 @@ funct.addEventListener('click', function() {
                 final.value = final.value.replace('=', random());
                 final.value = final.value.slice('-' + document.getElementById('C').value);
             }
-    
         }
         else {
             (function () {
@@ -95,8 +94,8 @@ rangeInputs.forEach(input => {
 
 const random = (length = (Math.round(Math.random() * (document.getElementById("customRange").value - 1) + 1))) => {
 
-    let chars = '1234567890 !@#$%^&*()-_.?/{}[];": abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    let complexChars = '1234567890 !@#$%^&*()-_.?/{}[];": абвгдежзийклмнопрстуфхцчшщъьюя АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЬЮЯ abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    let chars = '1234567890!@#$%^&*()-_.?/{}[];:abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    let complexChars = '1234567890!@#$%^&*()-_.?/{}[];:абвгдежзийклмнопрстуфхцчшщъьюяАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЬЮЯabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     let strnew = '';
 
     if(length <= 1){
@@ -140,7 +139,7 @@ let saveFile = () => {
             '--------------------------------------------------------' + '\n' +
             'Your custom seed: ' + password.value + '\n' +
             '--------------------------------------------------------' + '\n' +
-            'Your secure password: ' + final.value.replaceAll(' ','') + '\n' +
+            'Your secure password: ' + final.value + '\n' +
             '--------------------------------------------------------';
             const textToBLOB = new Blob([data], { type: 'text/plain' });
 
@@ -175,8 +174,8 @@ let saveFile = () => {
 }
 
 function replacing(str) {
-    let strAm = "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890 -_.&?!@ #/";
-    let strNz = "0987654321 nopqrstuvwxyzabcdefghijklm NOPQRSTUVWXYZABCDEFGHIJKLM -_.&?!@ #/";
+    let strAm = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-_.&?!@#/";
+    let strNz = "/#@!?&._-0987654321nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM";
     let finstr = '';
     for (let i = 0; i < str.length; i++) {
         if (strAm.includes(str.charAt(i))) {
