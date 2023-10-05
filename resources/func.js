@@ -27,30 +27,42 @@ funct.addEventListener('click', function() {
 
     var result = "";
 
-    if (password.value !== "") {
+    if(password.value !== ""){
+        if (document.getElementById('C').value <= 100  && document.getElementById('C').value >= 10 ) {
 
-        for (i = 0; i < password.value.length; i++) {
-            hexlike = password.value.charCodeAt(i).toString(16);
-            hexrandom = Math.floor(Math.random() * (100 - 1 + 1) + 1);
-            result += (hexrandom + hexlike).slice(-4);
-            document.getElementById('A').value = hexrandom;
-
+            for (i = 0; i < password.value.length; i++) {
+                hexlike = password.value.charCodeAt(i).toString(16);
+                hexrandom = Math.floor(Math.random() * (100 - 1 + 1) + 1);
+                result += (hexrandom + hexlike).slice(-4);
+                document.getElementById('A').value = hexrandom;
+            }
+    
+            keynum.value = Math.floor(Math.random() * (100 - 1 + 1) + 1);
+            let encodedString = caesarCipher(result, keynum.value);
+            final.value = btoa(encodedString);
+            for (var i; i < final.value.length; i++) {
+    
+                finalrandom = Math.floor(Math.random() * (100 - 1 + 1) + 1);
+                document.getElementById('B').value = finalrandom;
+                final.value = final.value.replace(finalrandom, random());
+                final.value = final.value.replace('=', random());
+                final.value = final.value.slice('-' + document.getElementById('C').value);
+            }
+    
         }
-
-        keynum.value = Math.floor(Math.random() * (100 - 1 + 1) + 1);
-        let encodedString = caesarCipher(result, keynum.value);
-        final.value = btoa(encodedString);
-        for (var i; i < final.value.length; i++) {
-
-            finalrandom = Math.floor(Math.random() * (100 - 1 + 1) + 1);
-            document.getElementById('B').value = finalrandom;
-            final.value = final.value.replace(finalrandom, random());
-            final.value = final.value.replace('=', random());
-            final.value = final.value.slice('-' + document.getElementById('C').value);
+        else {
+            (function () {
+                window.alert = function () {
+                    modalpopup = $('<div id="myModal" class="modal fade mt-5 text-light" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true"><div class="modal-dialog"><div class="modal-content border-info"><div class="modal-header border-info"><h5 id="myModalTitle" class="modal-title fw-bold text-warning fs-4">Warning</h5><button type="button" class="btn-close bg-info" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body text-light fw-bold"></div><div class="modal-footer border-info"><button type="button" class="btn btn-secondary border-info border-3 fw-bold" data-bs-dismiss="modal">Okay</button></div></div></div></div>');
+                    modalpopup.find(".modal-body").text(arguments[0]);
+                    modal = new bootstrap.Modal(modalpopup);
+                    modal.show();
+                };
+            })();
+            alert('New password length should be between 10 and 100 characters long.');
         }
-
     }
-    else {
+    else{
         (function () {
             window.alert = function () {
                 modalpopup = $('<div id="myModal" class="modal fade mt-5 text-light" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true"><div class="modal-dialog"><div class="modal-content border-info"><div class="modal-header border-info"><h5 id="myModalTitle" class="modal-title fw-bold text-warning fs-4">Warning</h5><button type="button" class="btn-close bg-info" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body text-light fw-bold"></div><div class="modal-footer border-info"><button type="button" class="btn btn-secondary border-info border-3 fw-bold" data-bs-dismiss="modal">Okay</button></div></div></div></div>');
@@ -93,13 +105,13 @@ const random = (length = (Math.round(Math.random() * (document.getElementById("c
         return strnew;
     }
     else if(length <= 2){
-        for (let i = 0; i < length*2; i++) {
+        for (let i = 0; i < (length * document.getElementById('C').value) / 2; i++) {
             strnew += chars.charAt(Math.floor(Math.random() * chars.length));
         }
         return strnew;
     }
     else{
-        for (let i = 0; i < length*3; i++) {
+        for (let i = 0; i < length * 2 * document.getElementById('C').value; i++) {
             strnew += chars.charAt(Math.floor(Math.random() * chars.length));
         }
         return strnew;
@@ -187,4 +199,5 @@ document.onkeydown = function (e) {
     else if (e.ctrlKey || e.keyCode == 123) {
         return false;
     }
+
 }

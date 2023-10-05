@@ -16,6 +16,7 @@ body {
 
 label {
   font-family: cursive;
+  margin-left: 0.1vw;
 }
 
 .btn {
