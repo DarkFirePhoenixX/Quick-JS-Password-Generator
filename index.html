@@ -74,12 +74,32 @@
             <input type="text" name="custom_service" id="custom_service" class="form-control clearbox">
           </div>
           <label class="fw-bold my-2">Hashed password:</label>
+          <div class="row">
+          <div class="col-11">
           <input type="text" readonly name="hashed" id="result" class="form-control clearbox">
+        </div>
+        <div class="col-1">
+          <input style="margin-left: -20px;" type="submit" class="btn btn-dark fw-bold border-info border-3 text-white" name="copy" id="copyClipboard" value="📋">
+        </div>
+      </div>
           <input type="submit" class="btn btn-dark fw-bold border-info border-3 text-white mt-4 mb-3" name="change" id="funct" value="Generate password">
           <input type="submit" name="save" class="btn btn-dark ms-2 fw-bold border-info border-3 text-white mt-4 mb-3" value="Export password to file" id="savefile" onclick="saveFile()">
           <input type="submit" class="btn btn-dark fw-bold border-info border-3 text-white mt-4 mb-3 ms-2" name="reset" id="reset" value="Reset generator">
         </div>
         <div class="text-center mt-2" style="font-family: cursive; font-size: 11px">by DarkFirePhoenixX ©</div>
+      </div>
+    </div>
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+      <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+          <img src="./resources/logo.png" class="rounded me-2" style="width: 5vh;" alt="logo">
+          <strong class="me-auto">Quick Password Generator</strong>
+          <small>1 sec ago</small>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close" style="background-color: white !important;"></button>
+        </div>
+        <div class="toast-body">
+          Password successfully copied to clipboard.
+        </div>
       </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>

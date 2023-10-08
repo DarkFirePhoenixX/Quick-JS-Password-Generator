@@ -34,6 +34,26 @@ label {
   transform: translateY(4px);
 }
 
+.toast-container{
+  color: white;
+}
+
+.toast{
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(modal_background.jpg);
+  background-position: center;
+}
+
+.toast-header{
+  background:
+  linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(https://wallpapercave.com/wp/wp4678541.jpg);
+background-position: center;
+}
+
+strong,small{
+  color: white;
+}
+
 .form-control {
   background:
     linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(https://wallpapercave.com/wp/wp4678541.jpg);

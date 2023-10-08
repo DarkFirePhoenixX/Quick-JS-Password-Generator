@@ -4,6 +4,8 @@ const final = document.getElementById('result');
 const keynum = document.getElementById('keynum');
 const service = document.getElementById('service');
 const custom = document.getElementById('custom');
+const clipboard = document.getElementById('copyClipboard');
+const toastCopy = document.getElementById('liveToast')
 
 document.addEventListener('DOMContentLoaded',function(){
     document.getElementById('custom_service').value = "Google"
@@ -22,6 +24,16 @@ service.addEventListener('change', function() {
     }
 
 });
+
+clipboard.addEventListener('click',()=>{
+    if(final.value != ""){
+        navigator.clipboard.writeText(final.value);
+        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastCopy)
+            toastBootstrap.show()
+    }
+    else{
+    }
+})
 
 funct.addEventListener('click', function() {
 
