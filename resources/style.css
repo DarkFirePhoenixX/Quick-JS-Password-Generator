@@ -19,6 +19,10 @@ label {
   margin-left: 0.1vw;
 }
 
+.btn-close{
+  cursor: url("hand.png"), auto !important;
+}
+
 .btn {
   background: linear-gradient(to right, #42d1e1 0%, #1869ff 100%);
   cursor: url("hand.png"), auto !important;
