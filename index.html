@@ -55,7 +55,7 @@
           </div>
           <div class="row">
             <div class="col-5">
-              <input type="number" name="length" id="C" min="10" max="100" placeholder="Max: 100 characters" class="form-control clearbox">
+              <input type="number" name="length" id="C" min="10" max="100" placeholder="Min: 10, Max: 100 characters" class="form-control clearbox">
             </div>
             <div class="col-7">
               <select name="service" id="service" class="form-control text-light bg-black bgselect fw-bold">
@@ -82,9 +82,11 @@
           <input style="margin-left: -20px;" type="submit" class="btn btn-dark fw-bold border-info border-3 text-white" name="copy" id="copyClipboard" value="📋">
         </div>
       </div>
-          <input type="submit" class="btn btn-dark fw-bold border-info border-3 text-white mt-4 mb-3" name="change" id="funct" value="Generate password">
-          <input type="submit" name="save" class="btn btn-dark ms-2 fw-bold border-info border-3 text-white mt-4 mb-3" value="Export password to file" id="savefile" onclick="saveFile()">
-          <input type="submit" class="btn btn-dark fw-bold border-info border-3 text-white mt-4 mb-3 ms-2" name="reset" id="reset" value="Reset generator">
+      <div class="row mx-2 d-flex justify-content-center align-items-center mt-2">
+          <input type="submit" class="col-4 btn btn-dark fw-bold border-info border-3 text-white mt-4 mb-3" name="change" id="funct" value="Generate password">
+          <input type="submit" name="save" class="col-4 btn btn-dark ms-2 fw-bold border-info border-3 text-white mt-4 mb-3" value="Export to file" id="savefile" onclick="saveFile()">
+          <input type="submit" class="col-3 btn btn-dark fw-bold border-info border-3 text-white mt-4 mb-3 ms-2" name="reset" id="reset" value="Reset">
+        </div>
         </div>
         <div class="text-center mt-2" style="font-family: cursive; font-size: 11px">by DarkFirePhoenixX ©</div>
       </div>
